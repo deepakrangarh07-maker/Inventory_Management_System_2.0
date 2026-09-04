@@ -17,6 +17,7 @@ List<Product> products = service.GetAllProducts();
 Product? found = service.FindProductByCode("P001");
 
 service.RemoveProduct("P001");
+
 foreach (Product item in products)
 {
     Console.WriteLine($"ID: {item.Id}");
@@ -25,11 +26,11 @@ foreach (Product item in products)
     Console.WriteLine($"Code: {item.Code}");
 }
 
-// if (found != null)
-// {
-//     Console.WriteLine($"ID: {found.Id}");
-//     Console.WriteLine($"Name: {found.Name}");
-//     Console.WriteLine($"Code: {found.Code}");
-//     Console.WriteLine($"Stock: {found.Stock}");
-// }
+if (found != null)
+{
+    Console.WriteLine($"ID: {found.Id}");
+    Console.WriteLine($"Name: {found.Name}");
+    Console.WriteLine($"Code: {found.Code}");
+    Console.WriteLine($"Stock: {found.Stock}");
+}
 

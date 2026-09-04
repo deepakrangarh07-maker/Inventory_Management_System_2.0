@@ -16,6 +16,7 @@ public class ProductService
         productLookup.Add(product.Code, product);
     }
 
+
     public void RemoveProduct(string code)
     {
         if (productLookup.ContainsKey(code)){
