@@ -9,11 +9,21 @@ public class ProductService
     private Dictionary<string, Product> productLookup =
         new Dictionary<string, Product>();
 
+    private HashSet<string> productName = new HashSet<string>();
+
     public void AddProduct(Product product)
     {
-        products.Add(product);
 
+        if (productName.Contains(product.Name))
+        {
+            Console.WriteLine("Product Name is already exist");
+            return;
+        }
+        products.Add(product);
+        productName.Add(product.Name);
         productLookup.Add(product.Code, product);
+        Console.WriteLine("Product added successfully.");
+
     }
 
 
@@ -22,7 +32,9 @@ public class ProductService
         if (productLookup.ContainsKey(code)){
             Product product = productLookup[code];
             products.Remove(product);
+            productName.Remove(product.Name);
             productLookup.Remove(code);
+            Console.WriteLine("Product Removed Succesfully");
         }
     }
 
