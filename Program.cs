@@ -1,9 +1,9 @@
 ﻿using Inventory_Management_System.Models;
 using Inventory_Management_System.Services;
 
-ProductService service = new ProductService();
+ItemMasterService service = new ItemMasterService();
 
-Product product = new Product
+ItemMaster itemMaster = new ItemMaster
 {
     Id = 1,
     Name = "CBC Reagent",
@@ -13,11 +13,11 @@ Product product = new Product
     OpeningStock = 10,
     ReorderLevel = 4
 };
-service.AddProduct(product);
-List<Product> products = service.GetAllProduct();
+service.AddProduct(itemMaster);
+List<ItemMaster> itemMasters = service.GetAllItems();
 // Product? found = service.FindProductByCode("P001");
 
-foreach (Product item in products)
+foreach (ItemMaster item in itemMasters)
 {
     Console.WriteLine($"ID: {item.Id}");
     Console.WriteLine($"Name: {item.Name}");

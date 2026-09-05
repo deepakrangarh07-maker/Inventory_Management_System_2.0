@@ -1,6 +1,6 @@
 namespace Inventory_Management_System.Models;
 
-public class Product
+public class ItemMaster
 {
     public int Id { get; set; }
 
