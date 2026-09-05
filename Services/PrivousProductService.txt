@@ -1,0 +1,44 @@
+// private Dictionary<string, Product> productLookup =
+    //     new Dictionary<string, Product>();
+
+    // private HashSet<string> productName = new HashSet<string>();
+
+
+
+    
+        // if (productName.Contains(product.Name && product.Department))
+        // {
+        //     Console.WriteLine("Product Name is already exist");
+        //     return;
+        // }
+        // productName.Add(product.Name);
+        // productName.Add(product.Department);
+        // productName.Add(product.Unit);
+        // productLookup.Add(product.Code, product);
+
+
+    // public void RemoveProduct(string code)
+    // {
+    //     if (productLookup.ContainsKey(code)){
+    //         Product product = productLookup[code];
+    //         products.Remove(product);
+    //         productName.Remove(product.Name);
+    //         productLookup.Remove(code);
+    //         Console.WriteLine("Product Removed Succesfully");
+    //     }
+    // }
+
+    // public List<Product> GetAllProducts()
+    // {
+    //     return products;
+    // }
+
+//     public Product? FindProductByCode(string code)
+//     {
+//         if (productLookup.TryGetValue(code, out Product? product))
+//         {
+//             return product;
+//         }
+
+//         return null;
+//     }

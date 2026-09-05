@@ -8,5 +8,11 @@ public class Product
 
     public string Code { get; set; } = "";
 
-    public int Stock { get; set; }
+    public string Department { get; set; } = "";
+    public string Unit { get; set; } = "";
+    public int OpeningStock { get; set; }
+    public int ReorderLevel {get; set;}
+    public int CurrentStock { get; set; }
+
+
 }
