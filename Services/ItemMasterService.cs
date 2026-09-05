@@ -29,7 +29,19 @@ public class ItemMasterService
 
         Console.WriteLine("Item added successfully.");
     }
-    // public void RemoveItem
+    public void RemoveItem(string name)
+    {
+        ItemMaster ? existingItemName = itemMasters.Find(existingItemName => existingItemName.Name == name);
+        
+        if(existingItemName != null)
+        {
+            itemMasters.Remove(existingItemName);
+            Console.WriteLine("Item Remove successfully.");
+            return;
+        }
+        Console.WriteLine("Item not found.");
+    }
+
 
 
 
