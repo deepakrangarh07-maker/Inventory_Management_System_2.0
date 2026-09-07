@@ -1,7 +1,10 @@
-﻿using Inventory_Management_System.Models;
+﻿using Inventory_Management_System;
+using Inventory_Management_System.Models;
 using Inventory_Management_System.Services;
 
 ItemMasterService service = new ItemMasterService();
+
+StockService stockService = new();
 
 ItemMaster itemMaster = new ItemMaster
 {
@@ -27,48 +30,26 @@ foreach (ItemMaster item in itemMasters)
     Console.WriteLine($"OpeningStock: {item.OpeningStock}");
     Console.WriteLine($"CurrentStock: {item.CurrentStock}");
     Console.WriteLine($"ReorderLevel: {item.ReorderLevel}");
+    stockService.StockIn(item, 6);
+    Console.WriteLine($"After Stock In Current Stock: {item.CurrentStock}");    
+    stockService.Stockout(item, 20);
+    Console.WriteLine($"After Stock Out Current Stock: {item.CurrentStock}");
 }
 
-// ItemMaster? searchItemName = service.SearchItemName("CBC Reagent");
+// service.UpdateItemName("CBC Reagent");
 
-// if(searchItemName != null)
+// foreach (ItemMaster item in itemMasters)
 // {
-//     Console.WriteLine($"Name: {searchItemName.Name}");
-//     Console.WriteLine($"Code: {searchItemName.Code}");
-//     Console.WriteLine($"Unit: {searchItemName.Unit}");
+//     Console.WriteLine($"ID: {item.Id}");
+//     Console.WriteLine($"Name: {item.Name}");
+//     Console.WriteLine($"Code: {item.Code}");
+//     Console.WriteLine($"Department: {item.Department}");
+//     Console.WriteLine($"Unit: {item.Unit}");
+//     Console.WriteLine($"OpeningStock: {item.OpeningStock}");
+//     Console.WriteLine($"CurrentStock: {item.CurrentStock}");
+//     Console.WriteLine($"ReorderLevel: {item.ReorderLevel}");
+    
 // }
-// else
-// {
-//     Console.WriteLine("Item is not found.");
-// }
-
-// service.RemoveItem("CBC Reagent");
-
-service.UpdateItemName("CBC Reagent");
-
-foreach (ItemMaster item in itemMasters)
-{
-    Console.WriteLine($"ID: {item.Id}");
-    Console.WriteLine($"Name: {item.Name}");
-    Console.WriteLine($"Code: {item.Code}");
-    Console.WriteLine($"Department: {item.Department}");
-    Console.WriteLine($"Unit: {item.Unit}");
-    Console.WriteLine($"OpeningStock: {item.OpeningStock}");
-    Console.WriteLine($"CurrentStock: {item.CurrentStock}");
-    Console.WriteLine($"ReorderLevel: {item.ReorderLevel}");
-}
 
 
-
-// if (found != null)
-// {
-//     Console.WriteLine($"ID: {found.Id}");
-//     Console.WriteLine($"Name: {found.Name}");
-//     Console.WriteLine($"Code: {found.Code}");
-//     Console.WriteLine($"Quantity: {found.Quantity}");
-//     Console.WriteLine($"Department: {found.Department}");
-//     Console.WriteLine($"Unit: {found.Unit}");
-//     Console.WriteLine($"OpeningStock: {found.OpeningStock}");
-//     Console.WriteLine($"ReorderLevel: {found.ReorderLevel}");
-// }
 
