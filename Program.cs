@@ -29,6 +29,19 @@ foreach (ItemMaster item in itemMasters)
     Console.WriteLine($"ReorderLevel: {item.ReorderLevel}");
 }
 
+ItemMaster? searchItemName = service.SearchItemName("cbc");
+
+if(searchItemName != null)
+{
+    Console.WriteLine($"Name: {searchItemName.Name}");
+    Console.WriteLine($"Code: {searchItemName.Code}");
+    Console.WriteLine($"Unit: {searchItemName.Unit}");
+}
+else
+{
+    Console.WriteLine("Item is not found.");
+}
+
 // if (found != null)
 // {
 //     Console.WriteLine($"ID: {found.Id}");

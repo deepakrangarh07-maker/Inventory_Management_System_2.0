@@ -14,5 +14,8 @@ public class ItemMaster
     public int ReorderLevel {get; set;}
     public int CurrentStock { get; set; }
 
-
+    internal string? ToString(string name)
+    {
+        throw new NotImplementedException();
+    }
 }

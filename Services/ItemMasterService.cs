@@ -42,6 +42,17 @@ public class ItemMasterService
         Console.WriteLine("Item not found.");
     }
 
+        public ItemMaster? SearchItemName(string name)
+        {
+            ItemMaster? existingName = itemMasters.Find(existingName => existingName.Name == name);
+            if(existingName != null)
+            {
+            return existingName;
+            }
+            Console.WriteLine("Item is not Found");
+            
+           return null;
+        }
 
 
 
