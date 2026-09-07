@@ -53,6 +53,23 @@ public class ItemMasterService
             
            return null;
         }
+    
+    public void UpdateItemName(string name)
+    {
+        ItemMaster ? existingName = itemMasters.Find(existingName => existingName.Name == name);
+        
+        if (existingName != null)
+        {
+            Console.Write("Enter The Name You Want to Update : ");
+            string? changeName = Console.ReadLine();
+            if(changeName != null)
+            {
+                existingName.Name = changeName;
+            }
+            return;
+        }
+        Console.WriteLine("Item not found");
+    }
 
 
 

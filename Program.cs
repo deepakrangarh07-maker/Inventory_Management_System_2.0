@@ -29,18 +29,36 @@ foreach (ItemMaster item in itemMasters)
     Console.WriteLine($"ReorderLevel: {item.ReorderLevel}");
 }
 
-ItemMaster? searchItemName = service.SearchItemName("cbc");
+// ItemMaster? searchItemName = service.SearchItemName("CBC Reagent");
 
-if(searchItemName != null)
+// if(searchItemName != null)
+// {
+//     Console.WriteLine($"Name: {searchItemName.Name}");
+//     Console.WriteLine($"Code: {searchItemName.Code}");
+//     Console.WriteLine($"Unit: {searchItemName.Unit}");
+// }
+// else
+// {
+//     Console.WriteLine("Item is not found.");
+// }
+
+// service.RemoveItem("CBC Reagent");
+
+service.UpdateItemName("CBC Reagent");
+
+foreach (ItemMaster item in itemMasters)
 {
-    Console.WriteLine($"Name: {searchItemName.Name}");
-    Console.WriteLine($"Code: {searchItemName.Code}");
-    Console.WriteLine($"Unit: {searchItemName.Unit}");
+    Console.WriteLine($"ID: {item.Id}");
+    Console.WriteLine($"Name: {item.Name}");
+    Console.WriteLine($"Code: {item.Code}");
+    Console.WriteLine($"Department: {item.Department}");
+    Console.WriteLine($"Unit: {item.Unit}");
+    Console.WriteLine($"OpeningStock: {item.OpeningStock}");
+    Console.WriteLine($"CurrentStock: {item.CurrentStock}");
+    Console.WriteLine($"ReorderLevel: {item.ReorderLevel}");
 }
-else
-{
-    Console.WriteLine("Item is not found.");
-}
+
+
 
 // if (found != null)
 // {
