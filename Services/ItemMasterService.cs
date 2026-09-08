@@ -80,6 +80,20 @@ public class ItemMasterService
     {
         return itemMasters;
     }
+
+
+    public void StockSummary ()
+    {
+        foreach (ItemMaster item in itemMasters)
+        {
+            Console.WriteLine($"ID: {item.Id}");
+            Console.WriteLine($"Name: {item.Name}");
+            Console.WriteLine($"Opening Stock: {item.OpeningStock}");
+            Console.WriteLine($"Current Stock: {item.CurrentStock}");
+            Console.WriteLine($"Reorder Level: {item.ReorderLevel}");
+            Console.WriteLine("-------------------------");
+        }
+    }
 }
 
 

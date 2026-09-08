@@ -2,7 +2,7 @@ using Inventory_Management_System.Models;
 
 public class StockMovementService
 {
-     private List<StockMovement> stockMovements = new List<StockMovement>(); 
+     private List<StockMovement> stockMovements = new List<StockMovement>();
 
      private int nextMovementId = 1;
 
