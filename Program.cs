@@ -4,7 +4,10 @@ using Inventory_Management_System.Services;
 
 ItemMasterService service = new ItemMasterService();
 
-StockService stockService = new();
+StockMovementService movementService = new();
+
+StockService stockService = new(movementService);
+
 
 ItemMaster itemMaster = new ItemMaster
 {
@@ -30,9 +33,9 @@ foreach (ItemMaster item in itemMasters)
     Console.WriteLine($"OpeningStock: {item.OpeningStock}");
     Console.WriteLine($"CurrentStock: {item.CurrentStock}");
     Console.WriteLine($"ReorderLevel: {item.ReorderLevel}");
-    stockService.StockIn(item, 6);
+    stockService.StockIn(item, 6, "A000012", "admin");
     Console.WriteLine($"After Stock In Current Stock: {item.CurrentStock}");    
-    stockService.Stockout(item, 20);
+    stockService.Stockout(item, 10, "1", "admin");
     Console.WriteLine($"After Stock Out Current Stock: {item.CurrentStock}");
 }
 
@@ -51,5 +54,5 @@ foreach (ItemMaster item in itemMasters)
     
 // }
 
-
+movementService.viewMovement();
 
