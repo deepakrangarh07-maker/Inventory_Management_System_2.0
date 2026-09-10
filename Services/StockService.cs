@@ -5,32 +5,26 @@ namespace Inventory_Management_System;
 public class StockService
 {
     private StockMovementService movementService;
-
     public StockService(StockMovementService movementService)
     {
         this.movementService = movementService;
     }
-
-
-
     public void StockIn(ItemMaster item, int quantity, string referenceNumber, string performedBy){
     
     item.CurrentStock += quantity;
-    
     {
         StockMovement movement = new StockMovement
         {
-        ItemId = item.Id,
-        MovementType ="Stock In",
-        Quantity = quantity,
-        MovementDate = DateTime.Now,
-        ReferenceNumber = referenceNumber,
-        PerformedBy = performedBy
+            ItemId = item.Id,
+            MovementType ="Stock In",
+            Quantity = quantity,
+            MovementDate = DateTime.Now,
+            ReferenceNumber = referenceNumber,
+            PerformedBy = performedBy
         };
-        movementService.AddMovement(movement);
+            movementService.AddMovement(movement);
     }
 }
-  
     public  void Stockout(ItemMaster item, int quantity, string referenceNumber, string performedBy)
     {
         try
