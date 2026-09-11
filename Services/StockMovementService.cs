@@ -5,7 +5,6 @@ public class StockMovementService
      private List<StockMovement> stockMovements = new List<StockMovement>();
 
      private int nextMovementId = 1;
-
      public void AddMovement(StockMovement movement)
     {
         movement.Id = nextMovementId;
