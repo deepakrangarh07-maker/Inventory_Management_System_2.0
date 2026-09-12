@@ -3,7 +3,6 @@ using Inventory_Management_System.Models;
 public class StockMovementService
 {
      private List<StockMovement> stockMovements = new List<StockMovement>();
-
      private int nextMovementId = 1;
      public void AddMovement(StockMovement movement)
     {
@@ -12,7 +11,6 @@ public class StockMovementService
 
         stockMovements.Add(movement);
     }
-
     public void viewMovement()
     {
         foreach(StockMovement movement in stockMovements)
