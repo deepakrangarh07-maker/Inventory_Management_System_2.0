@@ -1,3 +1,5 @@
+using LabInventorySystem.Enums;
+
 namespace Inventory_Management_System.Models;
 
 public class ItemMaster
@@ -8,7 +10,7 @@ public class ItemMaster
 
     public string Code { get; set; } = "";
 
-    public string Department { get; set; } = "";
+    public Department Department { get; set; }
     public string Unit { get; set; } = "";
     public int OpeningStock { get; set; }
     public int ReorderLevel {get; set;}
