@@ -1,4 +1,5 @@
 using Inventory_Management_System.Models;
+using LabInventorySystem.Enums;
 
 namespace Inventory_Management_System;
 
@@ -9,23 +10,24 @@ public class StockService
     {
         this.movementService = movementService;
     }
-    public void StockIn(ItemMaster item, int quantity, string referenceNumber, string performedBy){
-    
-    item.CurrentStock += quantity;
+    public void StockIn(ItemMaster item, int quantity, string referenceNumber, String performedBy)
     {
-        StockMovement movement = new StockMovement
+
+        item.CurrentStock += quantity;
         {
-            ItemId = item.Id,
-            MovementType ="Stock In",
-            Quantity = quantity,
-            MovementDate = DateTime.Now,
-            ReferenceNumber = referenceNumber,
-            PerformedBy = performedBy
-        };
+            StockMovement movement = new StockMovement
+            {
+                ItemId = item.Id,
+                MovementType = StockTransactionType.StockIn,
+                Quantity = quantity,
+                MovementDate = DateTime.Now,
+                ReferenceNumber = referenceNumber,
+                PerformedBy = performedBy
+            };
             movementService.AddMovement(movement);
+        }
     }
-}
-    public  void Stockout(ItemMaster item, int quantity, string referenceNumber, string performedBy)
+    public void Stockout(ItemMaster item, int quantity, string referenceNumber, string performedBy)
     {
         try
         {
@@ -35,13 +37,14 @@ public class StockService
             }
             item.CurrentStock -= quantity;
 
-        StockMovement movement = new StockMovement
+            StockMovement movement = new StockMovement
             {
                 ItemId = item.Id,
-                MovementType = "Stock Out",
+                MovementType = StockTransactionType.StockOut,
                 Quantity = quantity,
                 MovementDate = DateTime.Now,
                 ReferenceNumber = referenceNumber,
+                // PerformedBy = UserRole.Admin,
                 PerformedBy = performedBy,
             };
             movementService.AddMovement(movement);

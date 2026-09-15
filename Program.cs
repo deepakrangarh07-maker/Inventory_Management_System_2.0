@@ -1,6 +1,7 @@
 ﻿using Inventory_Management_System;
 using Inventory_Management_System.Models;
 using Inventory_Management_System.Services;
+using LabInventorySystem.Enums;
 
 
 // ========================================
@@ -76,7 +77,7 @@ while (running)
                 Id = 1,
                 Name = "CBC Reagent",
                 Code = "P001",
-                Department = "Biochemistry",
+                Department = Department.Biochemistry,
                 Unit = "box",
                 OpeningStock = 10,
                 ReorderLevel = 4
