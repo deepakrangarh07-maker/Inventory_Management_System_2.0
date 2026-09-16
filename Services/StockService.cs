@@ -13,6 +13,8 @@ public class StockService
     public void StockIn(ItemMaster item, int quantity, string referenceNumber, String performedBy)
     {
 
+
+
         item.CurrentStock += quantity;
         {
             StockMovement movement = new StockMovement
