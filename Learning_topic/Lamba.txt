@@ -1,0 +1,311 @@
+C# Lambda Expressions — Notes
+1. What is a Lambda Expression?
+
+A lambda expression is a short way to write a small function without giving it a separate method name.
+
+Basic syntax
+(parameter) => expression
+
+Example:
+
+x => x > 10
+
+Meaning:
+
+Take x and check whether x is greater than 10.
+
+2. Why use Lambda?
+
+Lambda expressions are commonly used with LINQ and collections.
+
+Instead of writing:
+
+bool IsGreaterThan10(int x)
+{
+    return x > 10;
+}
+
+You can write:
+
+x => x > 10
+
+This makes filtering, searching, sorting, and transforming data much shorter.
+
+3. Lambda Parts
+x      =>       x > 10
+│       │          │
+│       │          └── Expression
+│       └────────────── Lambda operator
+└────────────────────── Parameter
+4. One Parameter
+x => x * 2
+
+Examples:
+
+x => x > 50
+x => x == 10
+x => x < 100
+
+Parentheses are optional for one parameter:
+
+x => x > 10
+
+or
+
+(x) => x > 10
+
+Both work.
+
+5. Multiple Parameters
+
+For multiple parameters, use parentheses:
+
+(a, b) => a + b
+
+Another example:
+
+(a, b) => a > b
+6. Lambda with LINQ Where()
+
+This is one of the most important uses.
+
+List<int> numbers = new List<int>
+{
+    10, 25, 5, 40, 15, 30
+};
+
+Find numbers greater than 20:
+
+var result = numbers.Where(x => x > 20);
+
+Here:
+
+x => x > 20
+
+means:
+
+Check every number and keep it if it is greater than 20.
+
+Result:
+
+25
+40
+30
+7. Lambda with FirstOrDefault()
+var result = numbers.FirstOrDefault(x => x > 20);
+
+Meaning:
+
+Find the first number greater than 20.
+
+Result:
+
+25
+8. Lambda with Any()
+bool exists = numbers.Any(x => x == 40);
+
+Meaning:
+
+Does the list contain 40?
+
+Result:
+
+true
+9. Lambda with OrderBy()
+
+Ascending:
+
+var result = numbers.OrderBy(x => x);
+
+Descending:
+
+var result = numbers.OrderByDescending(x => x);
+
+Here:
+
+x => x
+
+means:
+
+Use the value of x for sorting.
+
+10. Lambda with Select()
+
+Select() is used to transform each item.
+
+var result = numbers.Select(x => x * 2);
+
+Original:
+
+10 25 5 40
+
+Result:
+
+20 50 10 80
+11. Lambda with Strings
+
+Suppose:
+
+List<string> items = new List<string>
+{
+    "CBC Kit",
+    "Glucose Reagent",
+    "Blood Collection Kit",
+    "Microscope"
+};
+
+Find items containing "Kit":
+
+var result = items.Where(x => x.Contains("Kit"));
+
+Result:
+
+CBC Kit
+Blood Collection Kit
+12. Lambda with Your Inventory Project
+
+Suppose you have:
+
+List<ItemMaster> items;
+Find Pathology items
+var result = items.Where(x => x.Department == "Pathology");
+Find low-stock items
+var result = items.Where(x => x.CurrentStock < x.ReorderLevel);
+Find item by code
+var item = items.FirstOrDefault(x => x.Code == "P001");
+Check whether an item exists
+bool exists = items.Any(x => x.Code == "P001");
+Sort by current stock
+var result = items.OrderBy(x => x.CurrentStock);
+Highest stock first
+var result = items.OrderByDescending(x => x.CurrentStock);
+13. Important Point About x
+
+x is just a variable name.
+
+You can write:
+
+numbers.Where(x => x > 20);
+
+or:
+
+numbers.Where(number => number > 20);
+
+Both mean the same thing.
+
+For example:
+
+items.Where(item => item.CurrentStock < item.ReorderLevel);
+
+This is often easier for beginners to understand.
+
+14. Lambda with a Block Body
+
+Normally:
+
+x => x * 2
+
+For multiple statements:
+
+x =>
+{
+    int result = x * 2;
+    return result;
+};
+
+The { } version requires return when producing a value.
+
+15. Lambda vs Normal Method
+Normal method
+bool IsGreaterThan10(int x)
+{
+    return x > 10;
+}
+
+Usage:
+
+numbers.Where(IsGreaterThan10);
+Lambda
+numbers.Where(x => x > 10);
+
+The lambda is useful when the logic is small and only needed in that particular place.
+
+16. Lambda + LINQ Relationship
+
+You will see these together very often:
+
+LINQ Method	Example
+Where()	x => x > 10
+FirstOrDefault()	x => x.Code == "P001"
+Any()	x => x.Code == "P001"
+Select()	x => x.Name
+OrderBy()	x => x.CurrentStock
+OrderByDescending()	x => x.CurrentStock
+Count()	x => x.CurrentStock < 10
+Remember this idea:
+LINQ method + Lambda condition
+
+Example:
+
+items.Where(x => x.CurrentStock < x.ReorderLevel);
+
+LINQ: Where()
+Lambda: x => x.CurrentStock < x.ReorderLevel
+
+17. Quick Syntax Cheat Sheet
+x => x > 10
+
+Greater than 10
+
+x => x < 10
+
+Less than 10
+
+x => x == 10
+
+Equal to 10
+
+x => x != 10
+
+Not equal to 10
+
+x => x % 2 == 0
+
+Even number
+
+x => x * 5
+
+Multiply by 5
+
+x => x.Name
+
+Get the Name
+
+x => x.Department == "Pathology"
+
+Pathology department
+
+x => x.CurrentStock <= x.ReorderLevel
+
+Low-stock item
+
+⭐ Most Important Things to Remember
+Lambda is a short way to write a function.
+
+Basic syntax is:
+
+x => expression
+x is just a parameter name.
+=> is the lambda operator.
+Lambda is heavily used with LINQ.
+Where() + lambda → filtering.
+Select() + lambda → transforming.
+OrderBy() + lambda → sorting.
+FirstOrDefault() + lambda → finding the first match.
+Any() + lambda → checking whether something exists.
+One line to memorize:
+items.Where(x => x.CurrentStock < x.ReorderLevel);
+
+Read it as:
+
+"From items, give me the items where current stock is less than reorder level.
