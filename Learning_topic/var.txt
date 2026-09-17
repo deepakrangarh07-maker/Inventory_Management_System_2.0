@@ -1,0 +1,231 @@
+Day 1 — var in Modern C#
+
+var is one of the simplest modern C# features, but it's important to understand what it actually does rather than thinking it means "variable without a type."
+
+1. What is var?
+
+var tells the C# compiler:
+
+"Figure out the type of this variable from the value assigned to it."
+
+Example:
+
+var name = "CBC Reagent";
+var stock = 20;
+var price = 1250.50;
+
+The compiler determines:
+
+name  → string
+stock → int
+price → double
+
+So this:
+
+var stock = 20;
+
+is effectively:
+
+int stock = 20;
+Important
+
+var is not dynamic typing.
+
+Once the compiler determines the type, that type doesn't change.
+
+var stock = 20;
+
+stock = 30;       // ✅
+stock = "Twenty"; // ❌
+
+stock is still an int.
+
+2. var vs explicit type
+
+Both are valid:
+
+string itemName = "CBC Reagent";
+int stock = 20;
+double price = 1250.50;
+
+Using var:
+
+var itemName = "CBC Reagent";
+var stock = 20;
+var price = 1250.50;
+
+There is no runtime performance difference simply because you used var.
+
+3. var works with objects
+
+This is particularly useful in your Inventory project.
+
+Instead of:
+
+ItemMaster item = new ItemMaster();
+
+you can write:
+
+var item = new ItemMaster();
+
+The compiler knows:
+
+item → ItemMaster
+
+Similarly:
+
+var items = new List<ItemMaster>();
+
+The compiler knows:
+
+items → List<ItemMaster>
+4. var with methods
+
+Suppose you have:
+
+ItemMaster item = service.FindProductByCode("P001");
+
+You can write:
+
+var item = service.FindProductByCode("P001");
+
+If FindProductByCode() returns ItemMaster, then:
+
+item → ItemMaster
+5. var does NOT mean "I don't know the type"
+
+This is a common beginner misunderstanding.
+
+❌ Incorrect idea:
+
+var value = something;
+
+means:
+
+"value can contain anything."
+
+No.
+
+For example:
+
+var value = 100;
+
+means:
+
+value → int
+
+It cannot later become a string:
+
+value = "Hello"; // ❌
+
+If you actually need a variable that can hold different types, that's a different concept involving object or dynamic.
+
+6. When should you use var?
+Good use
+
+When the type is obvious from the right side:
+
+var item = new ItemMaster();
+var items = new List<ItemMaster>();
+var stock = 50;
+
+Especially:
+
+var item = new ItemMaster();
+
+is very readable because new ItemMaster() already tells us the type.
+
+Explicit type can be clearer
+
+For some code, this:
+
+decimal totalAmount = CalculateTotal();
+
+may communicate intent better than:
+
+var totalAmount = CalculateTotal();
+
+So don't follow the rule:
+
+"Always use var."
+
+Instead:
+
+Use var when it improves readability and the inferred type is clear.
+
+7. Your Inventory System example
+
+Imagine your StockService has:
+
+public void StockIn(List<ItemMaster> items, string code, int quantity)
+{
+    var item = items.FirstOrDefault(x => x.Code == code);
+
+    if (item == null)
+    {
+        Console.WriteLine("Item not found.");
+        return;
+    }
+
+    item.CurrentStock += quantity;
+
+    Console.WriteLine("Stock added successfully.");
+}
+
+Here var makes sense:
+
+var item = items.FirstOrDefault(...);
+
+because the method's result clearly represents an ItemMaster (or potentially null with nullable reference types).
+
+8. var with collections
+
+You'll frequently see:
+
+var items = new List<ItemMaster>();
+
+instead of:
+
+List<ItemMaster> items = new List<ItemMaster>();
+
+And:
+
+var products = new Dictionary<string, ItemMaster>();
+
+instead of:
+
+Dictionary<string, ItemMaster> products =
+    new Dictionary<string, ItemMaster>();
+
+This becomes especially useful as your project grows.
+
+9. One important rule
+
+var requires an initial value.
+
+This is invalid:
+
+var name;
+
+Why?
+
+Because the compiler has nothing from which to determine the type.
+
+But this is valid:
+
+var name = "Deepak";
+
+because the compiler can determine:
+
+string
+10. var is decided at compile time
+
+This is the key concept to remember:
+
+var stock = 20;
+
+During compilation, C# determines:
+
+stock → int
+
+It's not making a runtime decision every time you use stock.

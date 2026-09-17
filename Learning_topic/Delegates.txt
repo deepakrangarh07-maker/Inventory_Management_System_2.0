@@ -1,0 +1,422 @@
+C# Delegates — Notes
+1. What is a Delegate?
+
+A delegate is a type that can store a reference to a method.
+
+Simple meaning:
+
+A delegate allows you to treat a method like a variable and pass that method around.
+
+Think of it like a remote control:
+
+Delegate
+   ↓
+points to
+   ↓
+Method
+   ↓
+executes
+2. Basic Delegate Syntax
+
+First, declare a delegate:
+
+delegate int Operation(int a, int b);
+
+This means:
+
+Operation can point to any method that takes two int values and returns an int.
+
+Then create a matching method:
+
+static int Add(int a, int b)
+{
+    return a + b;
+}
+
+Connect the delegate to the method:
+
+Operation operation = Add;
+
+Call it:
+
+int result = operation(10, 20);
+
+Console.WriteLine(result);
+
+Output:
+
+30
+3. Important Rule
+
+The method and delegate must have a matching signature.
+
+Delegate:
+
+delegate int Operation(int a, int b);
+
+The method must be:
+
+static int Add(int a, int b)
+
+because:
+
+Return type → int
+Parameters  → int, int
+
+This would not match:
+
+static double Add(int a, int b)
+
+because the return type is different.
+
+4. Delegate With Different Methods
+
+One delegate can point to different methods as long as their signatures match.
+
+delegate int Operation(int a, int b);
+
+static int Add(int a, int b)
+{
+    return a + b;
+}
+
+static int Subtract(int a, int b)
+{
+    return a - b;
+}
+
+Now:
+
+Operation operation = Add;
+
+Console.WriteLine(operation(20, 10));
+
+Output:
+
+30
+
+Change the method:
+
+operation = Subtract;
+
+Console.WriteLine(operation(20, 10));
+
+Output:
+
+10
+
+So the delegate can point to:
+
+Add()
+   ↓
+Delegate
+
+or
+
+Subtract()
+   ↓
+Delegate
+5. Why Do We Need Delegates?
+
+Delegates are useful when you want to pass a method as a parameter.
+
+Example:
+
+static void Calculate(int a, int b, Operation operation)
+{
+    int result = operation(a, b);
+
+    Console.WriteLine(result);
+}
+
+Now:
+
+Calculate(10, 5, Add);
+
+Output:
+
+15
+
+And:
+
+Calculate(10, 5, Subtract);
+
+Output:
+
+5
+
+The same Calculate() method can perform different operations.
+
+6. Delegate + Lambda
+
+This connects directly to what you just learned about Lambda Expressions.
+
+Instead of:
+
+static int Add(int a, int b)
+{
+    return a + b;
+}
+
+You can use a lambda:
+
+Operation operation = (a, b) => a + b;
+
+Then:
+
+Console.WriteLine(operation(10, 20));
+
+Output:
+
+30
+
+So:
+
+Delegate
+   +
+Lambda
+   ↓
+Store a small piece of behavior
+7. Delegate With Your Inventory Project
+
+Imagine you want a delegate for stock calculations:
+
+delegate int StockOperation(int stock, int quantity);
+
+Stock in:
+
+static int StockIn(int stock, int quantity)
+{
+    return stock + quantity;
+}
+
+Stock out:
+
+static int StockOut(int stock, int quantity)
+{
+    return stock - quantity;
+}
+
+Use it:
+
+StockOperation operation = StockIn;
+
+int currentStock = operation(50, 20);
+
+Console.WriteLine(currentStock);
+
+Output:
+
+70
+
+Change to stock out:
+
+operation = StockOut;
+
+currentStock = operation(70, 20);
+
+Console.WriteLine(currentStock);
+
+Output:
+
+50
+8. Built-in Delegates
+
+In modern C#, you often don't need to declare your own delegate.
+
+C# provides built-in delegates:
+
+Action
+
+Used when a method does not return a value.
+
+Action<string> message = name =>
+{
+    Console.WriteLine($"Hello {name}");
+};
+
+message("Deepak");
+
+Output:
+
+Hello Deepak
+Func
+
+Used when a method returns a value.
+
+Func<int, int, int> add = (a, b) => a + b;
+
+int result = add(10, 20);
+
+Console.WriteLine(result);
+
+Output:
+
+30
+
+Read:
+
+Func<int, int, int>
+
+as:
+
+Input 1 → int
+Input 2 → int
+Output  → int
+Predicate
+
+Usually used when the result is true or false.
+
+Predicate<int> isEven = x => x % 2 == 0;
+
+Console.WriteLine(isEven(10));
+
+Output:
+
+True
+9. Action vs Func vs Predicate
+Delegate	Return	Example
+Action	Nothing (void)	Action<string>
+Func	A value	Func<int, int>
+Predicate	bool	Predicate<int>
+Easy memory trick:
+Action    → Do something
+Func      → Calculate/return something
+Predicate → Check something
+10. Delegate and LINQ
+
+You have already been using delegates without realizing it.
+
+For example:
+
+numbers.Where(x => x > 20);
+
+The lambda:
+
+x => x > 20
+
+is being passed to Where() as a delegate-compatible function.
+
+Similarly:
+
+numbers.Select(x => x * 2);
+
+and:
+
+numbers.Any(x => x == 40);
+
+all use lambda expressions with delegate-based APIs.
+
+So the relationship is:
+
+Lambda Expression
+       ↓
+can be assigned to
+       ↓
+Delegate
+       ↓
+used by
+       ↓
+LINQ
+11. Multicast Delegate
+
+A delegate can point to multiple methods.
+
+Example:
+
+Action action = Method1;
+action += Method2;
+
+Then:
+
+action();
+
+Both methods execute:
+
+Method1()
+Method2()
+
+Example:
+
+static void Method1()
+{
+    Console.WriteLine("Method 1");
+}
+
+static void Method2()
+{
+    Console.WriteLine("Method 2");
+}
+
+Action action = Method1;
+
+action += Method2;
+
+action();
+
+Output:
+
+Method 1
+Method 2
+
++= adds another method.
+
+-= removes a method:
+
+action -= Method1;
+12. Delegate vs Method
+Normal method
+int Add(int a, int b)
+{
+    return a + b;
+}
+
+The method performs the operation.
+
+Delegate
+Func<int, int, int> operation = Add;
+
+The delegate holds a reference to the method.
+
+Think:
+
+Method
+  ↓
+Add()
+
+Delegate
+  ↓
+operation
+  ↓
+points to Add()
+⭐ Most Important Points
+Delegate stores a reference to a method.
+The delegate defines what type of method it can reference.
+Method signature must match the delegate.
+A delegate can be passed as a parameter.
+A delegate can point to different methods.
+Lambda expressions can be assigned to delegates.
+Action → no return value.
+Func → returns a value.
+Predicate → returns bool.
+LINQ heavily uses delegate-compatible lambda expressions.
+Most important example:
+Func<int, int, int> add = (a, b) => a + b;
+
+int result = add(10, 20);
+
+Here:
+
+Func
+ ↓
+Delegate
+
+(a, b) => a + b
+ ↓
+Lambda
+
+add(10, 20)
+ ↓
+Executes lambda
+
+For your learning roadmap, Delegates are mainly a concept to understand. You don't need to force a custom delegate into your inventory project yet.
