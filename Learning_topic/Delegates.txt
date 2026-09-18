@@ -372,18 +372,14 @@ int Add(int a, int b)
 }
 
 The method performs the operation.
-
 Delegate
 Func<int, int, int> operation = Add;
-
 The delegate holds a reference to the method.
-
 Think:
 
 Method
   ↓
 Add()
-
 Delegate
   ↓
 operation
@@ -402,21 +398,15 @@ Predicate → returns bool.
 LINQ heavily uses delegate-compatible lambda expressions.
 Most important example:
 Func<int, int, int> add = (a, b) => a + b;
-
 int result = add(10, 20);
-
 Here:
-
 Func
  ↓
 Delegate
-
 (a, b) => a + b
  ↓
 Lambda
-
 add(10, 20)
  ↓
 Executes lambda
-
 For your learning roadmap, Delegates are mainly a concept to understand. You don't need to force a custom delegate into your inventory project yet.
