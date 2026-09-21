@@ -370,7 +370,6 @@ int Add(int a, int b)
 {
     return a + b;
 }
-
 The method performs the operation.
 Delegate
 Func<int, int, int> operation = Add;
