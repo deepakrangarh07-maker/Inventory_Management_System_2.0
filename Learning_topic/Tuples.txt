@@ -1,0 +1,17 @@
+using System;
+
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        var result = Calculate(1, 5);
+
+        Console.WriteLine(result.Sum);
+        Console.WriteLine(result.Product);
+    }
+
+    static (int Sum, int Product) Calculate(int a, int b)
+    {
+        return (a + b, a * b);
+    }
+}
