@@ -375,7 +375,6 @@ Delegate
 Func<int, int, int> operation = Add;
 The delegate holds a reference to the method.
 Think:
-
 Method
   ↓
 Add()
@@ -408,4 +407,10 @@ Lambda
 add(10, 20)
  ↓
 Executes lambda
+
+
+
+
+
+
 For your learning roadmap, Delegates are mainly a concept to understand. You don't need to force a custom delegate into your inventory project yet.
