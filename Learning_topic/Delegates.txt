@@ -408,9 +408,4 @@ add(10, 20)
  ↓
 Executes lambda
 
-
-
-
-
-
 For your learning roadmap, Delegates are mainly a concept to understand. You don't need to force a custom delegate into your inventory project yet.

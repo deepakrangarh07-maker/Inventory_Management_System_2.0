@@ -218,7 +218,7 @@ That's why don't worry if the => syntax looks strange right now. We'll properly 
 
 Now understand the difference
 This is the most important part.
-For your list:
+For your list:b
 List<int> numbers = new List<int>
 {
     10, 25, 5, 40, 15, 30
@@ -244,7 +244,7 @@ var result = numbers.Any(x => x == 40);
 → True
 ________________________________________
 Sum()
-What's the total?
+What's the total?   
 var result = numbers.Sum();
 → 125
 ________________________________________
